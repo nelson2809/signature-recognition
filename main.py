@@ -9,21 +9,21 @@ excel_file = "data.xlsx"
 pp_path = "images"
 df = pd.read_excel(excel_file)
 
-# Tkinter penceresi oluşturma
+# Creating a Tkinter window
 window = tk.Tk()
-window.title("İmza Tanıma Uygulaması")
+window.title("Signature Recognition Application")
 file_path = ""
 dataset_path = "sign_data/train"
-# Dosya seçme düğmesi oluşturma
+# Create a file selector button
 def open_file():
     global file_path
     file_path = filedialog.askopenfilename()
 
 
-file_button = ttk.Button(window, text="Dosya Seç", command=open_file)
+file_button = ttk.Button(window, text="Select File", command=open_file)
 file_button.grid(column=0, row=0, padx=10, pady=10, sticky='wens')
 
-# Korelasyon değeri giriş kutusu oluşturma
+# Create correlation value input box
 correlation_label = ttk.Label(window, text="Correlation (0-0.9) :")
 correlation_label.grid(column=1, row=0, padx=10, pady=10, sticky='wens')
 
@@ -76,20 +76,20 @@ def find_signature():
                 # Check if a match was found
                 if len(loc[0]) > 0:
                     result_label.config(text=get_person_info(int(folder[1:])))
-                    # Resmi etiket olarak ekleyin
+                    # Add image as Tag
                     image = Image.open(pp_path+f"/{folder}.png")
                     image = image.resize((256,256))
                     photo = ImageTk.PhotoImage(image)
                     label = Label(image=photo)
-                    label.image = photo     # photo nesnesini label nesnesinin bir özelliği olarak saklayın
+                    label.image = photo     # store the photo object as a property of the label object
                     label.grid(column=2, row=3, padx=10, pady=10, sticky='e')
                     return folder
 
                 
-    result_label.config(text="Bu imza, verisetindeki hiçbir imza ile eşleşmedi!")
+    result_label.config(text="This signature did not match any signature in the datasets!")
     return None
 
-find_button = ttk.Button(window, text="İmzayı Bul", command=find_signature)
+find_button = ttk.Button(window, text="Find Signature", command=find_signature)
 find_button.grid(column=0, row=1, padx=10, pady=10, sticky='wens')
 
 result_label = ttk.Label(window)
