@@ -35,19 +35,33 @@ correlation_entry.config(width=5, font=("Arial", 7))
 def get_person_info(id):
     person = df.loc[df['ID'] == id]
     if len(person) == 0:
-        return (f"ID bulunamadı! {id}")
+        return f"ID not found! {id}"
     else:
-        name = person['İsim'].values[0]
-        surname = person['Soyisim'].values[0]
-        birth_date = str(person['DT'].values[0]) + "/" + str(person['DT'].values[0])
-        birth_place = person['DY'].values[0]
-        return name + "\n"+ surname +"\n"+ birth_date[:10] +"\n"+ birth_place
+        name = str(person['Name'].values[0])
+        acc_no = str(person['ACC/NO'].values[0])
+        dob = str(person['DOB'].values[0])
+        location = str(person['Location'].values[0])
+
+        # Define labels and their maximum width for alignment
+        label_width = 10  # Adjust based on the longest label
+
+        formatted_info = (
+            f"{'Name'.ljust(label_width)}: {name}\n"
+            f"{'ACC/NO'.ljust(label_width)}: {acc_no}\n"
+            f"{'DOB'.ljust(label_width)}: {dob[:10]}\n"
+            f"{'Location'.ljust(label_width)}: {location}"
+        )
+
+        return formatted_info
+
+
+        # return name + "\n"+ surname +"\n"+ birth_date[:10] +"\n"+ birth_place
 
 def find_signature():
     result_label.config(text="")
         # Load the image and convert it to grayscale
     if(file_path == ""):
-        result_label.config(text="Lütfen bir imza seçin!")
+        result_label.config(text="Please choose a Signature!")
         return None
     image = cv2.imread(file_path)
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -84,7 +98,7 @@ def find_signature():
                     label.image = photo     # store the photo object as a property of the label object
                     label.grid(column=2, row=3, padx=10, pady=10, sticky='e')
                     return folder
-
+                 
                 
     result_label.config(text="This signature did not match any signature in the datasets!")
     return None
