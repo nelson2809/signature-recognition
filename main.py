@@ -90,7 +90,7 @@ def find_signature():
                 # Check if a match was found
                 if len(loc[0]) > 0:
                     result_label.config(text=get_person_info(int(folder[1:])))
-                    # Add image as Tag
+                    # # Add image as Tag
                     image = Image.open(pp_path+f"/{folder}.png")
                     image = image.resize((256,256))
                     photo = ImageTk.PhotoImage(image)

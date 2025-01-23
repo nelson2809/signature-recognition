@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h2> Signature Recognition </h2>
 <h3> Signature recognition using template matching and correlation </h3>
 <img src="https://i.imgur.com/qHAcfhX.gif">
@@ -17,3 +18,6 @@ The result of template matching is a 2D array of similarity values. The code use
 </h4>
 
 <img src="https://i.hizliresim.com/mp064yd.jpeg">
+=======
+# signature-recognition
+>>>>>>> 523cd084f95ef908c8e63a142f2976b01f3bc891
